@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RASHXIT - APK Mod & Cheat</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+  body { background:#000; color:#fff; overflow-x:hidden; min-height:100vh; }
+
+  .bg-anim { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; overflow:hidden; }
+  .blob { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.5; animation:float 20s infinite ease-in-out; }
+  .blob1 { width:300px; height:300px; background:#ff00cc; top:-100px; left:-100px; }
+  .blob2 { width:350px; height:350px; background:#3333ff; bottom:-100px; right:-100px; animation-delay:-5s; }
+  .blob3 { width:250px; height:250px; background:#00ffff; top:40%; left:30%; animation-delay:-10s; }
+  @keyframes float {
+    0%,100% { transform:translate(0,0) scale(1); }
+    33% { transform:translate(50px,-50px) scale(1.1); }
+    66% { transform:translate(-30px,30px) scale(0.9); }
+  }
+
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:30px 20px; text-align:center; position:relative; z-index:1; }
+  .logo-badge {
+    display:inline-block; padding:8px 20px; border-radius:50px;
+    background:linear-gradient(90deg,#ff00cc,#3333ff);
+    font-size:12px; font-weight:700; letter-spacing:2px;
+    margin-bottom:20px; animation:pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow:0 0 20px rgba(255,0,204,0.5); }
+    50% { box-shadow:0 0 40px rgba(255,0,204,0.9); }
+  }
+  .hero h1 {
+    font-size:clamp(28px,7vw,48px); font-weight:900; line-height:1.1;
+    margin-bottom:15px;
+    background:linear-gradient(90deg,#fff,#ff00cc,#3333ff,#fff);
+    background-size:200% auto;
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    animation:shine 3s linear infinite;
+  }
+  @keyframes shine { to { background-position:200% center; } }
+  .hero p { font-size:15px; color:#aaa; max-width:500px; line-height:1.6; margin-bottom:30px; }
+  .hero .highlight { color:#ff00cc; font-weight:700; }
+
+  .cta-group { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .btn { padding:14px 28px; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; text-decoration:none; border:none; transition:.3s; display:inline-block; }
+  .btn-primary { background:linear-gradient(90deg,#ff00cc,#3333ff); color:#fff; box-shadow:0 0 30px rgba(255,0,204,0.5); }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 10px 40px rgba(255,0,204,0.8); }
+  .btn-secondary { background:rgba(255,255,255,0.05); color:#fff; border:1px solid rgba(255,255,255,0.2); }
+  .btn-secondary:hover { background:rgba(255,255,255,0.1); transform:translateY(-3px); }
+
+  .stats { display:flex; gap:30px; margin-top:50px; flex-wrap:wrap; justify-content:center; }
+  .stat-item { text-align:center; }
+  .stat-item .num { font-size:28px; font-weight:900; color:#ff00cc; text-shadow:0 0 20px rgba(255,0,204,0.5); }
+  .stat-item .lbl { font-size:11px; color:#888; margin-top:5px; letter-spacing:1px; }
+
+  .scroll-hint { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); color:#666; font-size:11px; animation:bounce 2s infinite; }
+  @keyframes bounce {
+    0%,100% { transform:translateX(-50%) translateY(0); }
+    50% { transform:translateX(-50%) translateY(10px); }
+  }
+
+  section { padding:60px 20px; position:relative; z-index:1; }
+  .section-title { text-align:center; font-size:clamp(22px,5vw,32px); font-weight:900; margin-bottom:10px; }
+  .section-sub { text-align:center; color:#888; font-size:13px; margin-bottom:40px; }
+  .section-title .accent { background:linear-gradient(90deg,#ff00cc,#3333ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+  .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:15px; max-width:900px; margin:0 auto; }
+  .card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:22px; transition:.3s; position:relative; overflow:hidden; }
+  .card::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#ff00cc,#3333ff); transform:scaleX(0); transform-origin:left; transition:.3s; }
+  .card:hover { transform:translateY(-5px); border-color:rgba(255,0,204,0.5); }
+  .card:hover::before { transform:scaleX(1); }
+  .card .icon { font-size:32px; margin-bottom:12px; display:inline-block; }
+  .card h3 { font-size:16px; margin-bottom:8px; color:#fff; }
+  .card p { font-size:13px; color:#999; line-height:1.6; }
+
+  .testimonials { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:15px; max-width:900px; margin:0 auto; }
+  .testi { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:20px; }
+  .testi .stars { color:#ffc107; font-size:14px; margin-bottom:10px; }
+  .testi p { font-size:13px; color:#ccc; line-height:1.6; margin-bottom:12px; font-style:italic; }
+  .testi .user { display:flex; align-items:center; gap:10px; }
+  .testi .avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#ff00cc,#3333ff); display:flex; justify-content:center; align-items:center; font-size:14px; font-weight:700; }
+  .testi .name { font-size:12px; font-weight:700; }
+  .testi .role { font-size:10px; color:#888; }
+
+  .cta-bottom { text-align:center; padding:60px 20px; background:radial-gradient(circle at center,rgba(255,0,204,0.15),transparent 70%); }
+  .cta-bottom h2 { font-size:clamp(22px,5vw,32px); font-weight:900; margin-bottom:15px; }
+  .cta-bottom p { color:#aaa; margin-bottom:25px; font-size:14px; }
+
+  footer { text-align:center; padding:30px 20px; color:#666; font-size:11px; border-top:1px solid rgba(255,255,255,0.05); }
+
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:linear-gradient(90deg,#ff00cc,#3333ff); color:#fff; padding:12px 24px; border-radius:50px; font-size:13px; font-weight:700; opacity:0; transition:.3s; pointer-events:none; z-index:999; box-shadow:0 0 30px rgba(255,0,204,0.6); }
+  .toast.show { opacity:1; }
+</style>
+</head>
+<body>
+
+<div class="bg-anim">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+
+<section class="hero">
+  <div class="logo-badge">🔥 UPDATE TERBARU 2026</div>
+  <h1>APK MOD & CHEAT<br>GRATIS SEPUASNYA</h1>
+  <p>
+    Download APK mod, cheat game, dan tools keren lainnya.
+    <span class="highlight">100% gratis</span>, tanpa key, tanpa ribet.
+    Update tiap hari, langsung dari channel resmi kami.
+  </p>
+
+  <div class="cta-group">
+    <a href="#" class="btn btn-primary" onclick="joinChannel(event)">🚀 Join Channel Sekarang</a>
+    <a href="#fitur" class="btn btn-secondary">Lihat Fitur</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="num" id="stat1">0</div>
+      <div class="lbl">MEMBER AKTIF</div>
+    </div>
+    <div class="stat-item">
+      <div class="num" id="stat2">0</div>
+      <div class="lbl">APK MOD</div>
+    </div>
+    <div class="stat-item">
+      <div class="num" id="stat3">0</div>
+      <div class="lbl">DOWNLOAD/HARI</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">↓ Scroll untuk lihat fitur ↓</div>
+</section>
+
+<section id="fitur">
+  <h2 class="section-title">Kenapa Pilih <span class="accent">RASHXIT</span>?</h2>
+  <p class="section-sub">Bukan kaleng-kaleng. Ini alasan member kami betah.</p>
+
+  <div class="features">
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Update Cepat</h3>
+      <p>APK mod rilis tiap hari. Gak perlu nunggu lama, langsung bisa download.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔒</div>
+      <h3>Aman & Tested</h3>
+      <p>Semua file sudah dicek. Bebas malware, bebas virus, siap pakai.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💯</div>
+      <h3>100% Gratis</h3>
+      <p>Gak ada biaya tersembunyi. Gak ada key. Tinggal download dan main.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🎮</div>
+      <h3>Banyak Pilihan</h3>
+      <p>Cheat FF, ML, PUBG, APK mod, tools, dan masih banyak lagi.</p>
+    </div>
+    <div class="card">
+      <div class="icon">👥</div>
+      <h3>Komunitas Aktif</h3>
+      <p>Ribuan member siap bantu. Ada masalah? Tinggal tanya di channel.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🛡️</div>
+      <h3>Anti-Banned</h3>
+      <p>Cheat kami update terus biar aman dari deteksi anti-cheat game.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Kata <span class="accent">Member Kami</span></h2>
+  <p class="section-sub">Testimoni asli dari pengguna setia.</p>
+
+  <div class="testimonials">
+    <div class="testi">
+      <div class="stars">★★★★★</div>
+      <p>"Gila sih, cheat-nya work banget. Rank langsung naik 3 tier dalam sehari!"</p>
+      <div class="user">
+        <div class="avatar">A</div>
+        <div>
+          <div class="name">Andi Pratama</div>
+          <div class="role">Mobile Legends Player</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="stars">★★★★★</div>
+      <p>"Update-nya cepet, gak pernah kena banned. Recommended banget buat yang mau push rank."</p>
+      <div class="user">
+        <div class="avatar">B</div>
+        <div>
+          <div class="name">Budi Santoso</div>
+          <div class="role">Free Fire Player</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="stars">★★★★★</div>
+      <p>"Channel paling gacor. APK mod lengkap, admin ramah, gak pelit ilmu."</p>
+      <div class="user">
+        <div class="avatar">C</div>
+        <div>
+          <div class="name">Citra Dewi</div>
+          <div class="role">PUBG Mobile Player</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-bottom" id="join">
+  <h2>Siap Push Rank Hari Ini?</h2>
+  <p>Join channel kami sekarang. Gratis, gak ada syarat, langsung dapat akses semua file.</p>
+  <a href="#" class="btn btn-primary" onclick="joinChannel(event)" style="font-size:15px;padding:16px 36px">
+    🔥 JOIN CHANNEL GRATIS
+  </a>
+</section>
+
+<footer>
+  © 2026 RASHXIT · Semua file untuk tujuan edukasi · Gunakan dengan bijak
+</footer>
+
+<div class="toast" id="toast">🔥 Selamat bergabung!</div>
+
+<script>
+const CHANNEL_LINK = 'https://whatsapp.com/channel/0029VbCvX1t6GcG7ILEj8y1M';
+
+function animateCounter(id, target, duration) {
+  const el = document.getElementById(id);
+  const start = performance.now();
+  function update(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const value = Math.floor(progress * target);
+    el.textContent = value.toLocaleString('id-ID');
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+window.addEventListener('load', () => {
+  animateCounter('stat1', 15000, 2000);
+  animateCounter('stat2', 250, 2000);
+  animateCounter('stat3', 5000, 2000);
+});
+
+function joinChannel(e) {
+  e.preventDefault();
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+  setTimeout(() => {
+    window.open(CHANNEL_LINK, '_blank');
+  }, 800);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
